@@ -8,16 +8,28 @@
 <body>
 	<div id="app">
 		<!-- {{message}} -->
-		<button>0</button>
-		<button>1</button>
-		<button>2</button>
-		<button>3</button>
-		<button>4</button>
-		<button>5</button>
-		<button>6</button>
-		<button>7</button>
-		<button>8</button>
-		<button>9</button>
+		<button @click ="updateValues('0')">0</button>
+		<button @click ="updateValues('1')">1</button>
+		<button @click ="updateValues('2')">2</button>
+		<button @click ="updateValues('3')">3</button>
+		<button @click ="updateValues('4')">4</button>
+		<button @click ="updateValues('5') ">5</button>
+		<button @click ="updateValues('6')">6</button>
+		<button @click ="updateValues('7')">7</button>
+		<button @click ="updateValues('8')">8</button>
+		<button @click ="updateValues('9') ">9</button>
+
+		<br>
+		<button @click ="operation = '+' ">+</button>
+		<button @click ="operation = '-' ">-</button>
+		<button @click ="operation = '/' ">/</button>
+		<button @click ="operation = '*' ">*</button>
+		<br>
+		<button @click ="calculate">=</button>
+		First number : {{firstNumber}}
+		Second number : {{secondNumber}}
+		Operation : {{operation}}
+		result : {{result}}
 	</div>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script>
@@ -25,8 +37,43 @@
 	const app = createApp({
 		setup () {
 			const message = ref("coucou");
+			const firstNumber = ref("0");
+			const operation = ref("");
+			const secondNumber = ref("0");
+			const result = ref("");
+			const updateValues = function(value) {
+				console.log("hello")
+				if (operation.value == ""){
+					firstNumber.value += value;
+				}else{
+					secondNumber.value += value;
+				}
+			};
+			const calculate = function (){
+				switch (operation.value){
+					case "+":
+						result.value = parseInt(firstNumber.value) + parseInt(secondNumber.value);
+					break;
+					case "-":
+						result.value = parseInt(firstNumber.value) - parseInt(secondNumber.value);
+					break;
+					case "/":
+						result.value = parseInt(firstNumber.value) / parseInt(secondNumber.value);
+					break;
+					case "*":
+						result.value = parseInt(firstNumber.value) * parseInt(secondNumber.value);
+					break;
+				}
+
+			};
 			return {
-				message
+				message,
+				firstNumber,
+				operation,
+				secondNumber,
+				updateValues,
+				calculate,
+				result
 			}
 		}
 	});

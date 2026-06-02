@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Chat en ligne</title>
+</head>
+<body>
+	<div class="messages">
+		<ul></ul>
+		<ul class ="Akira"></ul>
+	</div>
+	<form action="#">
+		<input type="text">
+		<button>Envoyer</button>
+	</form>
+	<script>
+		fetch("https://isaxl.mamboleoo.be/APIS/fetch_messages.php")
+		.then(function (helo){
+			console.log(helo);
+			helo.json().then(function(data){
+				console.log(data);
+				updateChat(data.data);
+			})
+		})
+		function updateChat (messages){
+			messages.forEach(function (message){
+				console.log(message);
+				let listItem = document.createElement("li");
+				listItem.innerHTML = message.message + " (" + message.time + ")";
+				let list = document.querySelector("ul");
+				list.appendChild(listItem);
+			})
+		}
+		document.querySelector("form").addEventListener("submit",function(){
+			submitForm();
+		})
+		function submitForm(){
+			let text = document.querySelector("input").value;
+			console.log(text);
+			fetch("https://isaxl.mamboleoo.be/APIS/post_message.php", {
+				method: "POST",
+				headers: {
+					"Content-Type":"application/x-www-form-urlencoded"
+				},
+				body: "cle=ABCD123&texte=" + text,
+			});
+		}
+	</script>
+</body>
+</html>

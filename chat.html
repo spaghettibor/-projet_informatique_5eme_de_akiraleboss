@@ -24,6 +24,18 @@
 				updateChat(data.data);
 			})
 		})
+		function updateChat (messages){
+			messages.forEach(function (message){
+				console.log(message);
+				let listItem = document.createElement("li");
+				listItem.innerHTML = message.username + " : " + message.message + " (" + message.time + ")";
+				let list = document.querySelector("ul");
+				list.appendChild(listItem);
+			})
+		}
+		document.querySelector("form").addEventListener("submit",function(){
+			submitForm();
+		})
 		function submitForm(){
 			let text = document.querySelector(".message").value;
 			console.log(text);
@@ -37,17 +49,6 @@
 				body: "cle=ABCD123&username" + username + "&texte=" + text ,
 			});
 		}
-				function updateChat (messages){
-			messages.forEach(function (message){
-				console.log(message);
-				let listItem = document.createElement("li");
-				listItem.innerHTML = message.username + " : " + message.message + " (" + message.time + ")";
-				let list = document.querySelector("ul");
-				list.appendChild(listItem);
-			})
-		}
-		document.querySelector("form").addEventListener("submit",function(){
-			submitForm();
 	</script>
 </body>
 </html>

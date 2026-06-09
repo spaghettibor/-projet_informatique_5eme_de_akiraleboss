@@ -15,10 +15,6 @@
 		<ul></ul>
 		<ul class ="Akira"></ul>
 	</div>
-	<form action="#">
-		<input type="text">
-		<button>Envoyer</button>
-	</form>
 	<script>
 		fetch("https://isaxl.mamboleoo.be/APIS/fetch_messages.php")
 		.then(function (helo){
@@ -50,7 +46,7 @@
 				headers: {
 					"Content-Type":"application/x-www-form-urlencoded"
 				},
-				body: "cle=ABCD123&username" + username "&text=" + text ,
+				body: "cle=ABCD123&username" + username "&texte=" + text ,
 			});
 		}
 	</script>
